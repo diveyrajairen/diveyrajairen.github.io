@@ -86,7 +86,7 @@ function add_cell_to_sheet(worksheet, address, value) {
 	worksheet['!ref'] = XLSX.utils.encode_range(range);
 }
 
-server.listen(port,function(){
+server.listen(process.env.PORT || port,function(){
 	console.log("listening on port"+port);
 	if(!fs.existsSync(upload_dir))
 	{
