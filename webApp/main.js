@@ -1,4 +1,5 @@
 var XLSX = require('xlsx');
+const fs = require('fs');
 const nanp = require('./region/nanp-script');
 var path = require('path');
 var SocketIOFileUpload = require('socketio-file-upload');
@@ -9,7 +10,8 @@ const port = 9999;
 var app = express();
 var server  = require('http').createServer(app);
 app.use(SocketIOFileUpload.router).use(express.static(path.join(__dirname, 'assets')));
-app.use(express.static(path.join(__dirname, 'uploads')));
+const upload_dir = path.join(__dirname, 'uploads');
+app.use(express.static(upload_dir));
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var io = socketio.listen(server);
 
@@ -86,5 +88,9 @@ function add_cell_to_sheet(worksheet, address, value) {
 
 server.listen(port,function(){
 	console.log("listening on port"+port);
+	if(!fs.existsSync(upload_dir))
+	{
+		fs.mkdirSync(upload_dir);
+	}
 	nanp.readFile();
 });

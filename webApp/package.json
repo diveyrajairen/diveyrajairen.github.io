@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "exceljs": "^1.6.2",
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
     "socket.io": "^2.1.1",
     "socketio-file-upload": "^0.6.3",
     "xlsx": "^0.14.0"
